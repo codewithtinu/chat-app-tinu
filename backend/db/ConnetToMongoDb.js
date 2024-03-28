@@ -1,3 +1,12 @@
-const Tinu = process.env.Mongo_DB_URI;
-console.log('Tinu: ', Tinu);
-export default Tinu;
+import mongoose from "mongoose";
+
+const connectMongoDb = async() => {
+    try {
+       await mongoose.connect(process.env.Mongo_DB_URI);
+        console.log('Connected...')
+    } catch (error) {
+        console.log('Error connecting to MongoDB: ', error);
+    }
+}
+
+export default connectMongoDb;

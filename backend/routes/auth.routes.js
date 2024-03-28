@@ -2,10 +2,10 @@ import {signin, login, logout} from '../controller/app.controller.js';
 import express from 'express';
 const router = express.Router();
 // sign in
-router.get('/signin', signin);
+router.post('/signin', signin);
 // login
-router.get('/login', login);
+router.post('/login', login);
 // logout
-router.get('/logout', logout);
+router.post('/logout', logout);
 
 export default router;
