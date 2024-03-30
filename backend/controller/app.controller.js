@@ -90,10 +90,8 @@ const logout = async(req, resp) => {
     // console.log('logout controller');
     // resp.send('logout controller');
     try{
-        const {userName} = req.body;
-        const user = User.findOne({userName});
-        // delete req.session.userName;
-        generateTokenAndcookies(user._id, {maxAge: 0});
+        resp.cookie("jwt", "", {maxAge: 0});
+        resp.status(200).json({message:"Logged out Successfully"});
 
     }catch (error) {
         resp.status(500).json({ message: error.message })
