@@ -3,6 +3,7 @@
 import express from  'express';
 import dotenv from 'dotenv';
 import authRoutes from './routes/auth.routes.js';
+import messageRoutes from './routes/message.routes.js';
 import connectMongoDb from './db/ConnetToMongoDb.js';
 // import Tinu from './db/ConnetToMongoDb.js';
 
@@ -21,6 +22,8 @@ app.use(express.json());
 // });
 // https:localhost:2905/api/auth/signin
 app.use('/api/auth/', authRoutes);
+app.use('/api/message/', messageRoutes);
+
 app.listen(PORT, () => {
     connectMongoDb();
     console.log(`Server is started on port ${PORT}`);
