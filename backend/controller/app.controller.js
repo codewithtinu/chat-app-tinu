@@ -1,6 +1,6 @@
 import User from "../module/user.module.js";
 import bcrypt from 'bcryptjs';
-import generateTokenAndcookies from "../utilities/generateTokenAndcookies.js";
+import generateTokenAndSetCookie from "../utilities/generateTokenAndcookies.js";
 // sign in
 const signin = async(req, resp) => {
     
@@ -35,7 +35,7 @@ const signin = async(req, resp) => {
         if(newUser){
         await newUser.save();
         // generate jwt token
-        generateTokenAndcookies(newUser._id, resp);
+        generateTokenAndSetCookie(newUser._id, resp);
         resp.status(200).json({
             _id : newUser.id,
             fullName : newUser.fullName,
@@ -69,7 +69,7 @@ const login = async(req, resp) => {
         }
 
         resp.status(200).json({message: 'User login successfully'})
-        generateTokenAndcookies(user._id, resp);
+        generateTokenAndSetCookie(user._id, resp);
 
         resp.send(200).json({
             _id: user.id,

@@ -3,8 +3,9 @@
 import express from  'express';
 import dotenv from 'dotenv';
 import authRoutes from './routes/auth.routes.js';
-import messageRoutes from './routes/message.routes.js';
+import messageRoutes from './routes/message.routes.js'
 import connectMongoDb from './db/ConnetToMongoDb.js';
+import cookieParser from 'cookie-parser';
 // import Tinu from './db/ConnetToMongoDb.js';
 
 dotenv.config();
@@ -15,6 +16,7 @@ const PORT = process.env.port || 5000;
 
 const app = express();
 app.use(express.json());
+app.use(cookieParser());
 
 // app.get('/', (req, resp) => {
 //     console.log('welcome tinu');
@@ -22,7 +24,7 @@ app.use(express.json());
 // });
 // https:localhost:2905/api/auth/signin
 app.use('/api/auth/', authRoutes);
-app.use('/api/message/', messageRoutes);
+app.use('/api/messages/', messageRoutes);
 
 app.listen(PORT, () => {
     connectMongoDb();
