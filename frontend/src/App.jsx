@@ -1,10 +1,22 @@
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import './App.css'
+import Signup from './pages/signup/Signup';
+import Login from './pages/login/Login';
+import Home from './pages/home/Home';
 
 function App() {
 
   return (
     <>
-      <h1 className='text-blue-600 text-4xl font-semibold'>Welcome to tinus-chat-app</h1>
+      <div className='w-full h-screen flex items-center justify-center'>
+        <BrowserRouter>
+          <Routes>
+            <Route path='/signup' element={<Signup />} />
+            <Route path='/' element={<Login />} />
+            <Route path='/home' element={<Home />} />
+          </Routes>
+        </BrowserRouter>
+      </div>
     </>
   )
 }

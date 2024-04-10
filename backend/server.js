@@ -1,18 +1,14 @@
-// const express = require('express');
-// const dotenv = require('dotenv');
 import express from  'express';
 import dotenv from 'dotenv';
-import authRoutes from './routes/auth.routes.js';
-import messageRoutes from './routes/message.routes.js'
 import connectMongoDb from './db/ConnetToMongoDb.js';
 import cookieParser from 'cookie-parser';
-// import Tinu from './db/ConnetToMongoDb.js';
+
+import authRoutes from './routes/auth.routes.js';
+import messageRoutes from './routes/message.routes.js';
+import userRoutes from './routes/user.routes.js';
 
 dotenv.config();
 const PORT = process.env.port || 5000;
-
-// const dbConnection = process.env.Mongo_DB_URI;
-// console.log('dbConnection: ', dbConnection);
 
 const app = express();
 app.use(express.json());
@@ -23,8 +19,10 @@ app.use(cookieParser());
 //     resp.send('welcome to tinus-chat-api')
 // });
 // https:localhost:2905/api/auth/signin
+
 app.use('/api/auth/', authRoutes);
 app.use('/api/messages/', messageRoutes);
+app.use('/api/users/', userRoutes);
 
 app.listen(PORT, () => {
     connectMongoDb();
