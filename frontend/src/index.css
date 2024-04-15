@@ -3,6 +3,6 @@
 @tailwind utilities;
 
 body{
-    background: url('./assets/images/chat-background.jpeg') no-repeat bottom fixed;
+    background: url('./assets/images/chat-background_1.jpeg') no-repeat bottom fixed;
     background-size: cover;
 }
