@@ -1,10 +1,13 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { useAuthContext } from "../context/AuthContext";
 const useLogin = () => {
     const [loading, setLoading] = useState(false);
+   const {setAuthUser} = useAuthContext();
 
-    const isLogin = async({userName, password}) => {
-        const success = handelLoginValidation({userName, password});
+    const isLogin = async(userName, password) => {
+        debugger;
+        const success = handleLoginValidation(userName, password);
         if(!success) return;
         setLoading(true);
         try{
@@ -17,8 +20,12 @@ const useLogin = () => {
             });
 
             const data = await resp.json();
-            consoel.log('login hook = ', data);
-            
+            console.log('logoin data: ', data);
+            if(data.error){
+                throw  new Error(data.error);
+            }
+            localStorage.setItem('chat-user', JSON.stringify(data));
+            setAuthUser(data);
         }catch(err){
             toast.error(err.message);
         }finally{
@@ -31,14 +38,17 @@ const useLogin = () => {
 
 export default useLogin;
 
-function handelLoginValidation({userName, password}){
-    
-    if(!userName || !password){
-        toast.error('Please fill all fields');
-        return false;
+function handleLoginValidation(userName, password) {
+    if(!userName || !password ) {
+      // alert('Please fill out all fields');
+      toast.error('Please fill out all fields');
+      return false;
     }
+   
     if(password.length < 6){
-        toast.error('Password must be at least 6 characters long');
-        return false;
+      toast.error('Password should be minimum of 6 characters long.')
+      return false;
     }
-}
+  
+    return true;
+  }

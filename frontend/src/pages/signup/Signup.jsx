@@ -18,6 +18,7 @@ const Signup = () => {
     e.preventDefault();
     console.log('inputs: ', inputs);
     await signup(inputs);
+    
   }
 
   const handleCheckboxes = (gender) => {
